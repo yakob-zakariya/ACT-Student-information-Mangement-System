@@ -1,0 +1,99 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Dashboard</title>
+    {% tailwind_css %}
+    <style>
+      /* Custom transitions for smooth toggle */
+      .transition-transform {
+        transition: transform 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <div class="flex">
+      <!-- Sidebar -->
+      <div
+        id="sidebar"
+        class="fixed inset-y-0 left-0 bg-blue-900 text-white w-64 p-4 transform transition-transform -translate-x-full lg:translate-x-0 h-screen overflow-y-auto"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-semibold">Sidebar</h2>
+          <button
+            id="closeSidebar"
+            class="lg:hidden px-2 py-1 bg-red-500 text-white rounded"
+          >
+            Close
+          </button>
+        </div>
+        <ul>
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded"
+              >Dashboard</a
+            >
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded">Settings</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded">Profile</a>
+          </li>
+          <!-- Add more items to demonstrate scrolling -->
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded">Item 1</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded">Item 2</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded">Item 3</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded">Item 4</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded">Item 5</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded">Item 6</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block p-2 hover:bg-blue-800 rounded">Item 7</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Content -->
+      <div class="flex-1 ml-0 lg:ml-64 pl-4">
+        {% comment %} header {% endcomment %}
+        <div class="bg-white p-4 mb-3">
+          <button
+            id="toggleSidebar"
+            class="lg:hidden mb-4 px-4 py-2 bg-blue-900 text-white rounded"
+          >
+            Toggle Sidebar
+          </button>
+          <p>Header</p>
+        </div>
+        {% block content %} {% endblock content %}
+      </div>
+    </div>
+
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const toggleSidebarButton = document.getElementById("toggleSidebar");
+      const closeSidebarButton = document.getElementById("closeSidebar");
+
+      toggleSidebarButton.addEventListener("click", () => {
+        sidebar.classList.toggle("-translate-x-full");
+      });
+
+      closeSidebarButton.addEventListener("click", () => {
+        sidebar.classList.add("-translate-x-full");
+      });
+    </script>
+  </body>
+</html>
