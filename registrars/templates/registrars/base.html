@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Additional custom styles */
+      .sidebar {
+        transition: transform 0.3s ease-in-out;
+      }
+      .sidebar-hidden {
+        transform: translateX(-100%);
+      }
+    </style>
+  </head>
+  <body class="relative flex h-screen bg-gray-100">
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="absolute inset-y-0 left-0 w-64 px-2 space-y-6 text-white transition duration-200 ease-in-out transform -translate-x-full bg-gray-800 sidebar py-7 md:relative md:translate-x-0"
+    >
+      <div class="flex items-center justify-between px-4">
+        <h1 class="text-3xl font-semibold">Dashboard</h1>
+        <!-- Close button, visible only on small screens -->
+        <button
+          id="close-btn"
+          class="text-gray-500 focus:outline-none md:hidden"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <nav>
+        <a
+          href="#"
+          class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"
+          >Home</a
+        >
+        <a
+          href="#"
+          class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"
+          >About</a
+        >
+        <a
+          href="#"
+          class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"
+          >Services</a
+        >
+        <a
+          href="#"
+          class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"
+          >Contact</a
+        >
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex flex-col flex-1">
+      <!-- Header -->
+      <header
+        class="flex items-center justify-between w-full p-4 bg-white shadow-md"
+      >
+        <button
+          id="menu-btn"
+          class="text-gray-500 focus:outline-none md:hidden"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
+        <h1 class="text-2xl font-semibold">Dashboard</h1>
+      </header>
+
+      <!-- Content -->
+      <main class="flex-1 p-4">{% block content %}{% endblock content %}</main>
+    </div>
+
+    <!-- JavaScript to toggle the sidebar -->
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const closeBtn = document.getElementById("close-btn");
+      const sidebar = document.getElementById("sidebar");
+
+      menuBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("-translate-x-full");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.add("-translate-x-full");
+      });
+    </script>
+  </body>
+</html>

@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts',
+    'adminApp',
+    'registrars',
     'django_browser_reload',
     'theme',
     'tailwind',
@@ -129,6 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'accounts.User'
+LOGIN_URL = '/login'
 
 # TailwindCSS settings
 TAILWIND_APP_NAME = 'theme'
