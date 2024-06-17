@@ -1,0 +1,44 @@
+{% extends "adminApp/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex items-center justify-between">
+          <h5 class="card-title">Academic Years</h5>
+          <a href="{% url 'add-academic-year' %}">
+            <button class="btn btn-primary">Add Academic Year</button>
+          </a>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Academic Year</th>
+            <th class="d-none d-xl-table-cell">Start Date</th>
+            <th class="d-none d-xl-table-cell">End Date</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for year in academic_years %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{year.name}}</td>
+            <td class="d-none d-xl-table-cell">{{year.start_date}}</td>
+            <td class="d-none d-xl-table-cell">{{year.end_date}}</td>
+            <td>
+              <a href="{% url 'delete-academic-year' year.id %}"
+                ><span class="badge bg-danger">Delete</span></a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

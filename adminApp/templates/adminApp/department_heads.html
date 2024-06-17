@@ -5,9 +5,9 @@
     <div class="card flex-fill">
       <div class="card-header">
         <div class="flex justify-between">
-          <h5 class="mb-2 card-title">Reistrars</h5>
-          <a href="{% url 'add-registrar' %}">
-            <button class="btn btn-success">+ Add registrar</button>
+          <h5 class="mb-2 text-xl card-title">Department Heads</h5>
+          <a href="{% url 'add-department-head' %}">
+            <button class="btn btn-success">+ Add Department Head</button>
           </a>
         </div>
       </div>
@@ -18,26 +18,22 @@
             <th>UserName</th>
             <th>Full Name</th>
             <th>Email</th>
-            <th>Edit</th>
+            <th>Department</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          {% for registrar in registrars %}
+          {% for user in department_heads %}
           <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{registrar.username}}</td>
-            <td>
-              {{registrar.first_name}} {{registrar.middle_name}}
-              {{registrar.last_name}}
-            </td>
-            <td class="d-none d-xl-table-cell">{{registrar.email}}</td>
-
-            <td>
-              <a href=""><span class="badge bg-secondary">Edit</span></a>
+            <td>{{user.username}}</td>
+            <td>{{user.first_name}} {{user.middle_name}} {{user.last_name}}</td>
+            <td class="d-none d-xl-table-cell">{{user.email}}</td>
+            <td class="d-none d-xl-table-cell">
+              {{user.department_head.department.name}}
             </td>
             <td>
-              <a href="{% url 'delete-registrar' registrar.id %}"
+              <a href="{% url 'delete-department-head' user.id %}"
                 ><span class="badge bg-danger">Delete</span></a
               >
             </td>

@@ -1,0 +1,36 @@
+{% extends "adminApp/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex items-center justify-between">
+          <h5 class="card-title">Departments</h5>
+          <a href="{% url 'add-department' %}">
+            <button class="btn btn-primary">Add Department</button>
+          </a>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Department Name</th>
+            <th class="d-none d-xl-table-cell">Department Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for department in departments %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{department.name}}</td>
+            <td class="d-none d-xl-table-cell">{{department.code}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

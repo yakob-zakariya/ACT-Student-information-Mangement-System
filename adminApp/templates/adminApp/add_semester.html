@@ -1,0 +1,8 @@
+{% extends "adminApp/base.html" %} {% block content %}
+<form method="POST">
+  {% csrf_token %} {{form.as_p}}
+  <button class="w-full py-3 font-bold text-white rounded-lg bg-sky-600">
+    Add Semester
+  </button>
+</form>
+{% endblock content %}

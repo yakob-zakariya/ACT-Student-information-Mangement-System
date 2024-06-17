@@ -4,35 +4,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout,authenticate
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-
-# def login_view(request):
-#     if request.method=="POST":
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             print(username,password)
-#             user = authenticate(username=username,password=password)
-#             if user is not None:
-#                 login(request,user)
-#                 if user.role=="STUDENT":
-#                     return redirect("student-dashboard")
-#                 elif user.role=="REGISTRAR":
-#                     return redirect("registrar-dashboard")
-#                 elif user.role=="DEPARTMENT_HEAD":
-#                     return redirect('coordinator-dashboard')
-#                 elif user.role=="TEACHER":
-#                     return redirect('teacher-dashboard')
-#                 elif user.role=='ADMIN':
-#                     return redirect('admin-dashboard')
-#                 return redirect('index')
-#             else:
-#                 form.add_error(None, "Invalid username or password.")
-#                 return render(request,'accounts/login.html',{'form':form})
-                
-#     else:
-#         form = LoginForm()
-#         return render(request,'accounts/login.html',{'form':form})
+from .models import User 
+from school.models import Department
 
 
 def login_view(request):
@@ -61,4 +34,9 @@ def home_view(request):
     if user.role == "REGISTRAR":
         return render(request,'registrars/index.html')
     elif user.role == "ADMIN":
-        return render(request,'adminApp/index.html')
+        students = User.objects.filter(role="STUDENT").count()
+        registrars = User.objects.filter(role="REGISTRAR").count()
+        departments = Department.objects.all().count()
+        teachers = User.objects.filter(role="TEACHER").count()
+        
+        return render(request,'adminApp/index.html',{'students':students,'registrars':registrars,'departments':departments,'teachers':teachers})

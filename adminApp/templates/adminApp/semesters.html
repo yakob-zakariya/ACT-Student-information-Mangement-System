@@ -1,0 +1,38 @@
+{% extends "adminApp/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex items-center justify-between">
+          <h5 class="card-title">Semesters</h5>
+          <a href="{% url 'add-semester' %}">
+            <button class="btn btn-primary">+ Add new Semester</button>
+          </a>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Semester Name</th>
+            <th class="d-none d-xl-table-cell">Academic Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for semester in semesters %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{semester.name}}</td>
+            <td class="d-none d-xl-table-cell">
+              {{semester.AcademicYear.name}}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
