@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'adminApp',
     'registrars',
     'school',
+    'departmentHead',
     'django_browser_reload',
     'theme',
     'tailwind',

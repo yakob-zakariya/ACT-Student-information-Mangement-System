@@ -1,0 +1,46 @@
+{% extends "coordinator/base.html" %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>View All Students</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Batch</th>
+            <th>Section</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          <tr>
+            <td>{{ student.username }}</td>
+            <td>
+              {{ student.first_name }} {{student.middle_name}}
+              {{student.last_name}}
+            </td>
+
+            <td>{{ student.email }}</td>
+            <td>{{ student.student_profile.batch.name }}</td>
+            <td>
+              {% if student.student_profile.section.name %}
+              {{student.student_profile.section.name}} {% else %}
+              <a
+                class="bg-teal-400 py-2 rounded-lg px-3"
+                href="{% url 'assign-section' student.id %}"
+                >Assign Section</a
+              >
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {% endblock content %}
+</div>

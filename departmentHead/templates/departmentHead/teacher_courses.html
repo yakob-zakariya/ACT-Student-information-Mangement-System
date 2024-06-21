@@ -1,0 +1,59 @@
+{% extends "coordinator/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex justify-between items-center">
+          <h5 class="card-title">Teachers Course Allocation</h5>
+          <a href="{% url 'allocate-teacher' %}">
+            <button class="btn btn-primary">Allocate Teacher</button>
+          </a>
+        </div>
+      </div>
+      <table class="table table-hover my-0">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Teacher UserName</th>
+            <th>Teacher full name</th>
+            <th class="d-none d-xl-table-cell">Course name</th>
+            <th>Department</th>
+            <th>Section</th>
+            <th class="d-none d-xl-table-cell">semester</th>
+            <th>Academic Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course_teacher in teacher_courses %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{course_teacher.teacher.username}}</td>
+            <td class="d-none d-xl-table-cell">
+              {{course_teacher.teacher.first_name}}
+              {{course_teacher.teacher.middle_name}}
+            </td>
+            <td class="d-none d-xl-table-cell">
+              {{course_teacher.course.name}}
+            </td>
+            <td class="d-none d-xl-table-cell">
+              {{course_teacher.section.batch.department.name}}
+            </td>
+            <td class="d-none d-xl-table-cell">
+              {{course_teacher.section.name}}
+            </td>
+            <td class="d-none d-xl-table-cell">
+              {{course_teacher.semester.name}}
+            </td>
+            <td class="d-none d-xl-table-cell">
+              {{course_teacher.semester.AcademicYear.name}}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

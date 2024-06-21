@@ -1,0 +1,37 @@
+{% extends "coordinator/base.html" %} {% block content %}
+
+<form
+  method="POST"
+  action=""
+  class="w-full md:w-10/12 mx-auto bg-white p-6 shadow-lg rounded-lg"
+>
+  {% csrf_token %}
+  <h1 class="text-xl text-center text-slate-500 font-medium mb-3">
+    Select Course for the Academic year and semester
+  </h1>
+  <div class="grid grid-cols-1 md:grid-cols-3 space-x-4">
+    <div>
+      <label for="{{ form.batches.id_for_label }}">Batches</label>
+      {{form.batches}}
+    </div>
+    <div>
+      <label for="{{ form.academic_year.id_for_label }}">Academic Year</label>
+      {{form.academic_year}}
+    </div>
+    <div>
+      <label for="{{ form.semester.id_for_label }}">semester</label>
+      {{form.semester}}
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 mt-2">
+    {% for course in form.courses %} {{course}} {% endfor %}
+  </div>
+  <button
+    class="bg-sky-700 w-full py-3 flex items-center justify-center text-white text-lg font-medium rounded-lg"
+  >
+    Add Course
+  </button>
+</form>
+
+{% endblock content %}

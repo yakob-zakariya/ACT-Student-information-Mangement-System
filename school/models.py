@@ -48,7 +48,7 @@ class Batch(models.Model):
     def __str__(self):
         return f" Batch of {self.name} ({self.department.code})"
  
-###########   Batch Model Ends ##########
+###########   Batch Model Ends ########## 
 ########## Section Model Start #############
 
 class Section(models.Model):

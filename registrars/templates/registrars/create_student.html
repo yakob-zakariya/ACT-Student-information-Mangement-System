@@ -1,0 +1,14 @@
+{% extends "registrars/base.html" %} {% block content %}
+
+<div class="bg-white p-6 rounded-md shadow-lg">
+  <form method="POST">
+    <div class="grid grid-cols-1 md:grid-cols-2 space-x-3">
+      {% csrf_token %} {{form}}
+    </div>
+    <button class="w-full rounded-lg bg-sky-600 py-3 font-bold text-white">
+      Add Student
+    </button>
+  </form>
+</div>
+
+{% endblock content %}

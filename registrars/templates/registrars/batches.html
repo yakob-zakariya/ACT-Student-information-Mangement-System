@@ -1,0 +1,52 @@
+{% extends "registrars/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex items-center justify-between">
+          <h5 class="card-title">{{department.name}} Batches</h5>
+          <a href="{% url 'create_batch' %}">
+            <button class="btn btn-primary">Add new Batch</button>
+          </a>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Batch Name</th>
+            <th>Sections</th>
+            <th>Students</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for batch in batches %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{batch.name}}</td>
+            <td>
+              <a href="{% url 'sections' batch.id %}">
+                <button class="btn btn-primary">View Sections</button>
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'students_of_batch' batch.id %}">
+                <button class="btn btn-primary">View Students</button>
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'delete_batch' batch.id %}"
+                ><span class="badge bg-danger">Delete</span></a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

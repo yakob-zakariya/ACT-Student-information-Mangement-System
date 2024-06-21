@@ -1,14 +1,14 @@
 from django.urls import path 
 from . import views
 urlpatterns = [
-    
+    path('',views.admin_home,name='admin-home'),
     # registrar user 
     path('registrars/',views.registrars,name='registrars'),
     path('add-registrar/',views.add_registrar,name='add-registrar'),
     path('delete-registrar/<int:pk>/',views.delete_registrar,name='delete-registrar'),
     
     # departments 
-    path('departments/',views.departments,name='departments'),
+    path('departments/',views.departments,name='admin_departments'),
     path('add-department/',views.add_department,name='add-department'),
     
     # department Heads user

@@ -115,7 +115,7 @@ class Student(models.Model):
     profile_image = models.ImageField(default='profile_image/default.jpg',upload_to='profile_image',blank=True,null=True)
     department = models.ForeignKey('school.Department',on_delete=models.SET_NULL,blank=True,null=True)
     batch = models.ForeignKey('school.Batch',on_delete=models.SET_NULL,null=True,blank=True)
-    section = models.ForeignKey('school.Section',on_delete=models.SET_NULL,blank=True,null=True)
+    section = models.ForeignKey('school.Section',on_delete=models.SET_NULL,blank=True,null=True,related_name='students')
     
 # model to save all the teacher data
 class Teacher(models.Model):
@@ -125,7 +125,7 @@ class Teacher(models.Model):
     department = models.ForeignKey('school.Department',on_delete=models.SET_NULL,blank=True,null=True)
     
 
-# model to save all the teacher data 
+# model to save all the teacher data  
 class DepartmentHead(models.Model):
     department_head=models.OneToOneField(DepartmentHeadUser,on_delete=models.CASCADE,related_name='department_head')
     status = models.BooleanField(default=True)

@@ -1,0 +1,39 @@
+{% extends "registrars/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex items-center justify-between">
+          <h5 class="card-title">Departments</h5>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Department Name</th>
+            <th>code</th>
+            <th>Batches</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for department in departments %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{department.name}}</td>
+            <td>{{department.code}}</td>
+            <td>
+              <a href="{% url 'batches' department.id %}">
+                <button class="btn btn-primary">View Batches</button>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

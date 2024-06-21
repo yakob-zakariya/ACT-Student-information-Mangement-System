@@ -1,121 +1,105 @@
+{% load static %} {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Responsive Dashboard</title>
+    <title>ACT Student Mangment System</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
       rel="stylesheet"
     />
-    <style>
-      /* Additional custom styles */
-      .sidebar {
-        transition: transform 0.3s ease-in-out;
-      }
-      .sidebar-hidden {
-        transform: translateX(-100%);
-      }
-    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'users/css/style.css' %}" />
   </head>
-  <body class="relative flex h-screen bg-gray-100">
-    <!-- Sidebar -->
-    <div
-      id="sidebar"
-      class="absolute inset-y-0 left-0 w-64 px-2 space-y-6 text-white transition duration-200 ease-in-out transform -translate-x-full bg-gray-800 sidebar py-7 md:relative md:translate-x-0"
-    >
-      <div class="flex items-center justify-between px-4">
-        <h1 class="text-3xl font-semibold">Dashboard</h1>
-        <!-- Close button, visible only on small screens -->
-        <button
-          id="close-btn"
-          class="text-gray-500 focus:outline-none md:hidden"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
-      <nav>
-        <a
-          href="#"
-          class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"
-          >Home</a
-        >
-        <a
-          href="#"
-          class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"
-          >About</a
-        >
-        <a
-          href="#"
-          class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"
-          >Services</a
-        >
-        <a
-          href="#"
-          class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700"
-          >Contact</a
-        >
+  <body>
+    <div class="wrapper d-flex align-items-stretch">
+      <nav id="sidebar">
+        <div class="custom-menu">
+          <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+          </button>
+        </div>
+        <div class="p-4 pt-5">
+          <span>(Registrar) </span>
+          <h1>
+            <a href="{% url 'home' %}" class="logo">ACT </a>
+          </h1>
+          
+          <ul class="mb-5 list-unstyled components">
+            <li class="active">
+              <a
+                href="{% url 'departments' %}"
+                
+                >Departments</a
+              >
+              
+            </li>
+            <li>
+              <a href="{% url 'create_student'%}">Register new Student</a>
+            </li>
+
+  
+            <li>
+              <a href="#">Portfolio</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+
+            <li>
+              <a href="#">{{request.user.username}}</a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}">Logout</a>
+            </li>
+          </ul>
+
+          <div class="footer">
+            <p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright &copy;
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              ACT Student Management System | Developed by <a href="" target="_blank">ACT</a>
+            </p>
+          </div>
+        </div>
       </nav>
+
+      <!-- Page Content  -->
+      <div id="content" >
+        <div class="py-4 pl-24 bg-indigo-400">naviagation</div>
+        <div class="p-4 pt-5 p-md-5">
+        
+        
+
+          {% if messages %}
+          {% for message in messages%}
+          <div class="alert alert-{{message.tags}}">
+            {{ message}}
+          </div>
+        {% endfor %}
+          {% endif %}
+
+        {% block content %}{% endblock content %}
+      </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="flex flex-col flex-1">
-      <!-- Header -->
-      <header
-        class="flex items-center justify-between w-full p-4 bg-white shadow-md"
-      >
-        <button
-          id="menu-btn"
-          class="text-gray-500 focus:outline-none md:hidden"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
-        </button>
-        <h1 class="text-2xl font-semibold">Dashboard</h1>
-      </header>
-
-      <!-- Content -->
-      <main class="flex-1 p-4">{% block content %}{% endblock content %}</main>
-    </div>
-
-    <!-- JavaScript to toggle the sidebar -->
-    <script>
-      const menuBtn = document.getElementById("menu-btn");
-      const closeBtn = document.getElementById("close-btn");
-      const sidebar = document.getElementById("sidebar");
-
-      menuBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("-translate-x-full");
-      });
-
-      closeBtn.addEventListener("click", () => {
-        sidebar.classList.add("-translate-x-full");
-      });
-    </script>
+    <script src="{% static 'users/js/jquery.min.js' %}"></script>
+    <script src="{% static 'users/js/popper.js' %}"></script>
+    <script src="{% static 'users/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'users/js/main.js' %}"></script>
   </body>
 </html>

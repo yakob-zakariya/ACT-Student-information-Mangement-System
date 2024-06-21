@@ -1,0 +1,13 @@
+{% extends "coordinator/base.html" %} {% block content %}
+
+<form method="POST">
+  <h1 class="text-2xl font-bold">Batch Of {{ batch.name }}</h1>
+  {% csrf_token %} {{form}}
+  <button
+    class="bg-sky-700 py-2 flex w-full items-center justify-center text-white font-bold rounded"
+    type="submit"
+  >
+    Add Section
+  </button>
+</form>
+{% endblock content%}

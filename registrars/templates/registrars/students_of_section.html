@@ -1,0 +1,67 @@
+{% extends "registrars/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex items-center justify-between">
+          <h5 class="card-title">
+            {{section.batch.department.name}} batch of {{section.batch.name}}
+            {{section.name}} students
+          </h5>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Batch</th>
+            <th>Section</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>
+              {{student.first_name}} {{student.middle_name}}
+              {{student.last_name}}
+            </td>
+            <td>{{student.username}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.student.department.name}}</td>
+            <td>{{student.student.batch.name}}</td>
+            {% if student.student.section %}
+            <td>{{student.student.section.name}}</td>
+            {% else %}
+            <td>
+              <a href="{% url 'assign_section' student.id %}">
+                <button class="btn btn-primary">Assign Section</button>
+              </a>
+            </td>
+            {% endif %}
+            <td>
+              <a href="{% url 'delete_student' student.id %}"
+                ><span class="badge bg-danger">Delete</span></a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a
+        class="text-center mt-3 mb-3 block"
+        href="{% url 'export_pdf' section.id  %}"
+      >
+        <button class="btn btn-primary">Export to PDF</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
