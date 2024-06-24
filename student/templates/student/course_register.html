@@ -1,0 +1,47 @@
+{% extends "student/base.html" %}
+{% block content %}
+
+<div class="p-4 bg-white rounded-lg">
+<form method="POST" class="p-2">
+  <h1 class="mb-2 text-2xl font-semibold text-center text-gray-800">Select Courses</h1>
+    {% csrf_token %}
+  <!-- select_course_form.html -->
+
+
+  
+  <table class="w-full mb-3 border border-collapse border-gray-300 rounded-lg shadow-sm table-auto">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="px-4 py-2">No</th>
+        <th class="px-4 py-2">Select</th>
+        <th class="px-4 py-2">Course Name</th>
+        <th class="px-4 py-2">Course code</th>
+        <th class="px-4 py-2">Credit Hours</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      {% for course in form.courses.field.queryset %}
+      <tr>
+        <td class="px-6 py-4 border whitespace-nowrap">{{ forloop.counter }}</td>
+        <td class="px-6 py-4 border whitespace-nowrap">
+            {% for subfield in form.courses %}
+              {% if subfield.choice_label == course.name %}
+                {{ subfield }}
+              {% endif %}
+            {% endfor %}
+          </td>
+        <td class="px-6 py-4 border whitespace-nowrap">{{ course.name }}</td>
+        <td class="px-6 py-4 border whitespace-nowrap">{{ course.code }}</td>
+        <td class="px-6 py-4 border whitespace-nowrap">{{ course.credit_hour }}</td>
+       
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button class="flex items-center justify-center w-full px-12 py-2 text-lg font-medium text-white rounded-lg bg-violet-600">Register</button>
+</form>
+</div>
+
+</div>
+{% endblock content %}

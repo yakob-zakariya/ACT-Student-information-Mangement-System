@@ -1,0 +1,61 @@
+{% extends "departmentHead/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex items-center justify-between">
+          <h5 class="text-xl font-bold text-black">
+            Batch of : {{section.batch.name}}
+          </h5>
+          <h5 class="text-xl font-bold text-black">
+            Section: {{section.name}}
+          </h5>
+          <h5 class="text-xl font-bold text-black">
+            Academic Year : {{semester.AcademicYear.name}}
+          </h5>
+          <h5 class="text-xl font-bold text-black">
+            Semester : {{semester.name}}
+          </h5>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Course Name</th>
+            <th class="d-none d-xl-table-cell">Course Code</th>
+            <th>Credit Hour</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for section_teacher in section_teachers %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{section_teacher.course.name}}</td>
+            <td class="d-none d-xl-table-cell">
+              {{section_teacher.course.code}}
+            </td>
+            <td>{{section_teacher.course.credit_hour}}</td>
+            <td>
+              {% if section_teacher.teacher %}
+              {{section_teacher.teacher.username}} {% else %}
+              <a href="{% url 'assign-teacher' section_teacher.id %}">
+                <button
+                  class="bg-blue-600 py-2 flex items-center justify-center px-3 rounded-md text-white font-bold"
+                >
+                  Assign Teacher
+                </button>
+              </a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

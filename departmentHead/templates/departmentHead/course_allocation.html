@@ -1,9 +1,9 @@
-{% extends "coordinator/base.html" %} {% block content %}
+{% extends "departmentHead/base.html" %} {% block content %}
 
 <form
   method="POST"
   action=""
-  class="w-full md:w-10/12 mx-auto bg-white p-6 shadow-lg rounded-lg"
+  class="w-full md:w-10/12 mx-auto bg-white p-6 mb-6 shadow-sm rounded-lg"
 >
   {% csrf_token %}
   <h1 class="text-xl text-center text-slate-500 font-medium mb-3">
@@ -24,13 +24,13 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 mt-2">
+  <div class="grid grid-cols-1 md:grid-cols-3 mt-2 mb-6">
     {% for course in form.courses %} {{course}} {% endfor %}
   </div>
   <button
     class="bg-sky-700 w-full py-3 flex items-center justify-center text-white text-lg font-medium rounded-lg"
   >
-    Add Course
+    Allocate Courses
   </button>
 </form>
 

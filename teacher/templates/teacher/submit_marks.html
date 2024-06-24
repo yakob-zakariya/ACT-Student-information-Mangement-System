@@ -1,0 +1,13 @@
+{% extends "teacher/base.html" %} {% block content %}
+
+<form method="POST">
+  <h1 class="text-2xl font-bold text-center">Fill Marks</h1>
+  {% csrf_token %} {{form}}
+  <button
+    class="flex items-center justify-center w-full py-2 font-bold text-white rounded bg-sky-700"
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+{% endblock content%}

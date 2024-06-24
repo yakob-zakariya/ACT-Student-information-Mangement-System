@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .forms import AddUser,AddDepartmentHead,AddDepartment,AddAcademicYear,AddSemester
-from accounts.models import RegistrarUser,DepartmentHeadUser,DepartmentHead
+from accounts.models import RegistrarUser,DepartmentHeadUser,DepartmentHead,TeacherUser
 from django.contrib import messages
 from accounts.models import User
 from school.models import Department,AcademicYear,Semester
@@ -47,6 +47,42 @@ def delete_registrar(request,pk):
     messages.success(request, 'Registrar is  Deleted Successfully')
     return redirect('registrars')
 
+@login_required
+@admin_required
+def teachers(request):
+    teachers = TeacherUser.teachers.all()
+    return render(request,'adminApp/teachers.html',{'teachers':teachers})
+
+@login_required
+@admin_required
+def add_teacher(request):
+    if request.method == "POST":
+        form = AddUser(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('user_name')
+            first_name = form.cleaned_data.get('first_name')
+            middle_name = form.cleaned_data.get('middle_name')
+            last_name = form.cleaned_data.get('last_name')
+            email = form.cleaned_data.get('email')
+            print(username,first_name,middle_name,email)
+            teacher= TeacherUser.objects.create_user(username=username,first_name=first_name,last_name=last_name,middle_name=middle_name,email=email,password='1234')
+            
+            messages.success(request, 'Teacher is  Added Successfully')
+            return redirect('teachers')
+    else:
+        form = AddUser()
+    return render(request,'adminApp/add_registrar.html',{"form":form})
+
+
+
+@login_required
+@admin_required
+def delete_teacher(request,pk):
+    teacher = User.objects.get(pk = pk)
+    teacher.delete()
+    messages.success(request, 'Teacher is  Deleted Successfully')
+    return redirect('teachers')
+    
 @login_required
 @admin_required
 def departments(request):

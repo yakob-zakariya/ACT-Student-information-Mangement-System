@@ -1,0 +1,44 @@
+{% extends "departmentHead/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex items-center justify-between">
+          <h5 class="card-title">Courses</h5>
+          <a href="{% url 'add_course' %}">
+            <button class="btn btn-primary">+ Add Course</button>
+          </a>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Course Name</th>
+            <th class="d-none d-xl-table-cell">Course Code</th>
+            <th>Credit Hour</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in courses %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{course.name}}</td>
+            <td class="d-none d-xl-table-cell">{{course.code}}</td>
+            <td>{{course.credit_hour}}</td>
+            <td>
+              <a href="{% url 'delete-course' course.id %}"
+                ><span class="badge bg-danger">Delete</span></a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

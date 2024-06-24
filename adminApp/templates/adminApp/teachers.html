@@ -1,0 +1,52 @@
+{% extends "adminApp/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex justify-between">
+          <h5 class="mb-2 card-title">Teachers</h5>
+          <a href="{% url 'add-teacher' %}">
+            <button class="btn btn-success">+ Add Teacher</button>
+          </a>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>UserName</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for teacher in teachers %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{teacher.username}}</td>
+            <td>
+              {{teacher.first_name}} {{teacher.middle_name}}
+              {{teacher.last_name}}
+            </td>
+            <td class="d-none d-xl-table-cell">{{teacher.email}}</td>
+
+            <td>
+              <a href=""><span class="badge bg-secondary">Edit</span></a>
+            </td>
+            <td>
+              <a href="{% url 'delete-teacher' teacher.id %}"
+                ><span class="badge bg-danger">Delete</span></a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -24,13 +24,13 @@
   </head>
   <body>
     <div class="wrapper d-flex align-items-stretch">
-      <nav id="sidebar" class="active pt-4">
+      <nav id="sidebar" class="pt-4 active">
         <h1 class="text-xl">
-          <a href="{% url 'home' %}" class="logo text-xl"
-            >ACT Dep head ({{request.user.department_head.department.code}})</a
+          <a href="{% url 'home' %}" class="text-xl logo"
+            >ACT Teacher ({{request.user.username}})</a
           >
         </h1>
-        <ul class="list-unstyled components mb-5">
+        <ul class="mb-5 list-unstyled components">
           <li class="active">
             <a href="{% url 'home' %}"><span class="fa fa-home"></span>Home</a>
           </li>
@@ -76,16 +76,16 @@
 
       <!-- Page Content  -->
       <div id="content" class="">
-        <div class="bg-sky-700 p-3">
+        <div class="p-3 bg-sky-700">
           <button type="button" id="sidebarCollapse" class="btn btn-primary">
             <i class="fa fa-bars"></i>
             <span class="sr-only">Toggle Menu</span>
           </button>
         </div>
 
-        <div class="bg-white rounded-md p-3 m-4">
+        <div class="p-3 m-4 bg-white rounded-md">
           {% if messages %} {% for message in messages%}
-          <div class="bg-success p-3 px-4 rounded-4 mb-4">{{ message}}</div>
+          <div class="p-3 px-4 mb-4 bg-success rounded-4">{{ message}}</div>
           {% endfor %} {% endif %} {% block content %}{% endblock content %}
         </div>
       </div>

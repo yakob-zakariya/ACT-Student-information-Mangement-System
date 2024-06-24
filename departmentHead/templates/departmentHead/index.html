@@ -1,16 +1,22 @@
 {% extends "departmentHead/base.html" %} {% block content %}
 
 <h1
-  class="bg-sky-700 p-4 flex items-center justify-center text-2xl text-white rounded-lg shadow-lg"
+  class="bg-sky-700 p-4 flex items-center justify-center text-2xl text-white rounded-lg shadow-md"
 >
   {{request.user.coordinator_profile.department.name}} Batches
 </h1>
-<div class="flex items-center space-x-4 p-4">
+<div class="flex items-center space-x-6 p-4">
   {% for batch in batches %}
-  <a href="">
-    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
-      <h1>Batch of {{batch.name}}</h1>
-    </div>
+
+  <a
+    href="{% url 'batch-detail' batch.id %}"
+    class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 shadow-sm"
+  >
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      Batch {{batch.name}}
+    </h5>
   </a>
 
   {% endfor %}

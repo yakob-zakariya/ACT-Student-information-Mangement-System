@@ -1,0 +1,103 @@
+{% load static %} {% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ACT Student Mangment System</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'users/css/style.css' %}" />
+  </head>
+  <body>
+    <div class="wrapper d-flex align-items-stretch">
+      <nav id="sidebar">
+        <div class="custom-menu">
+          <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+          </button>
+        </div>
+        <div class="p-4 pt-5">
+          <h1>
+            <a href="{% url 'home' %}" class="logo">ACT </a>
+          </h1>
+          <ul class="mb-5 list-unstyled components">
+            <li class="active">
+              <a
+                href="{% url 'choose-semester' %}"
+                
+                >Registrations</a
+              >
+              
+            </li>
+            <li>
+              <a href="{% url 'grade-report' %}">Grade report</a>
+            </li>
+          
+            <li>
+              <a href="#">Add/drop</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+
+            <li>
+              <a href="{% url 'update-profile' %}">Profile</a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}">Logout</a>
+            </li>
+          </ul>
+
+          <div class="footer">
+            <p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              Copyright &copy;
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              All rights reserved | ACT
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Page Content  -->
+      <div id="content" >
+        <div class="py-4 pl-24 bg-indigo-400">naviagation</div>
+        <div class="p-4 pt-5 p-md-5">
+        
+        
+
+          {% if messages %}
+          {% for message in messages%}
+          <div class="alert alert-{{message.tags}}">
+            {{ message}}
+          </div>
+        {% endfor %}
+          {% endif %}
+
+        {% block content %}{% endblock content %}
+      </div>
+    </div>
+
+    <script src="{% static 'users/js/jquery.min.js' %}"></script>
+    <script src="{% static 'users/js/popper.js' %}"></script>
+    <script src="{% static 'users/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'users/js/main.js' %}"></script>
+  </body>
+</html>

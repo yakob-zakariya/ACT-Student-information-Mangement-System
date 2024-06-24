@@ -1,0 +1,45 @@
+{% extends "student/base.html" %} {% block content %}
+<div class="p-6 bg-white rounded-lg">
+
+      {% for semester,courses in semester_courses.items %} 
+      {% if courses %}
+
+      <div class="flex space-x-4">
+        <h2 class="text-lg font-bold text-slate-600">Academic Year : {{semester.AcademicYear.name}}</h2>
+        <h2 class="text-lg font-bold text-slate-600">Semester : {{ semester.name }} </h2>
+</div>
+      <div class="overflow-x-auto">
+        <table class="w-full mb-4 border border-collapse border-gray-300 table-auto">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="px-4 py-2">No</th>
+              <th class="px-4 py-2">Course Name</th>
+              <th class="px-4 py-2">Course Code</th>
+              <th class="px-4 py-2">Credit Hour</th>
+              <th class="px-4 py-2" >Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for course in courses %}
+            {% if course.grade %}
+            <tr>
+                <td class="px-4 py-2 border">{{ forloop.counter }}</td>
+                <td class="px-4 py-2 border">{{ course.course.name }}</td>
+                <td class="px-4 py-2 border">{{ course.course.code }}</td>
+                <td class="px-4 py-2 border">{{ course.course.credit_hour }}</td>
+                <td  class="px-4 py-2 border"> {{course.grade.grade}}</td>
+              </tr>
+            {% endif %}
+            
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %} {% endfor %}
+      </div>
+
+    </div>
+    
+
+    {% endblock content %}
+  </div>
+</div>

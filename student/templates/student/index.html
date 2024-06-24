@@ -1,0 +1,50 @@
+{% extends "student/base.html" %} {% block content %}
+
+<div class="bg-white p-6 rounded-md shadow-lg">
+  <div
+    class="bg-sky-700 flex justify-center items-center text-white text-xl font-md p-2 mb-4 rounded-md"
+  >
+    My profile
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 space-x-4">
+    <div class="col-span-2 space-y-4 text-black">
+      <p class="text-lg flex space-x-4 items-center">
+        <span class="font-bold"> Full Name : </span>
+        <span
+          >{{student.first_name}} {{student.middle_name}}
+          {{student.last_name}}</span
+        >
+      </p>
+
+      <p class="text-lg flex space-x-4 items-center">
+        <span class="font-bold"> ID No : </span>
+        <span>{{student.username}}</span>
+      </p>
+
+      <p class="text-lg flex space-x-4 items-center">
+        <span class="font-bold"> Department: </span>
+        <span>
+          {{student.student.department.name}}
+          ({{student.student.department.code}})
+        </span>
+      </p>
+
+      <p class="text-lg flex space-x-4 items-center">
+        <span class="font-bold">Batch of </span>
+        <span> {{student.student.batch.name}} </span>
+      </p>
+
+      <p class="text-lg flex space-x-4 items-center">
+        <span class="font-bold">Section </span>
+        <span> {{student.student.section.name}} </span>
+      </p>
+    </div>
+
+    <div class="justify-self-end">
+      <img src="{{student.student.profile_image.url}}" />
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

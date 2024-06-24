@@ -1,0 +1,66 @@
+{% extends "teacher/base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+    <div class="card flex-fill">
+      <div class="card-header">
+        <div class="flex items-center justify-center">
+          <h5 class="text-lg font-semibold text-black">
+            Students of Batch {{section.batch.name}} {{section.name}} Registered
+            for the Course {{course.name}} On Academic Year
+            {{semester.AcademicYear.name}} Semester {{semester.name}}
+          </h5>
+        </div>
+      </div>
+      <table class="table my-0 table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Id No</th>
+            <th>Full Name</th>
+            <th>Batch</th>
+            <th>Section</th>
+            <th>Academic Year</th>
+            <th>Semester</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registration_student in registration_students %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{registration_student.student.username}}</td>
+            <td>
+              {{registration_student.student.first_name}}
+              {{registration_student.student.middle_name}}
+              {{registration_student.student.last_name}}
+            </td>
+            <td>{{registration_student.student.student.section.batch.name}}</td>
+            <td>{{registration_student.student.student.section.name}}</td>
+            <td>{{registration_student.semester.AcademicYear.name}}</td>
+            <td>{{registration_student.semester.name}}</td>
+
+            <td>
+              {% if registration_student.grade %}
+              {{registration_student.grade.grade}} {% else %}
+              <a
+                href="{% url 'submit_marks' registration_student.id %}"
+                class="block"
+              >
+                <button
+                  class="flex items-center justify-center px-3 py-2 font-bold text-white rounded-lg text-md bg-sky-900"
+                >
+                  + Submit Garde
+                </button>
+              </a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

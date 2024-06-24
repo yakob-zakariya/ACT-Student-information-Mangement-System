@@ -1,11 +1,11 @@
 {% extends "adminApp/base.html" %} {% block content %}
 
 <div class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
-  <h5 class="text-lg text-center text-slate-600">Add Registrar User</h5>
+  <h5 class="text-lg text-center text-slate-600">Add User</h5>
   <form method="POST">
     {% csrf_token %} {{form.as_p}}
     <button class="w-full py-3 font-bold text-white rounded-lg bg-sky-600">
-      Add registrar
+      Add User
     </button>
   </form>
 </div>

@@ -1,0 +1,144 @@
+{% extends "student/base.html" %} {% block content %}
+<section class="bg-white dark:bg-gray-900">
+  <div class="px-4 pb-6 pt-3 lg:py-16">
+    <h2
+      class="mb-4 text-xl font-bold text-gray-900 dark:text-white text-center"
+    >
+      Update You information
+    </h2>
+    <form action="#">
+      <div class="flex items-center justify-center">
+        <img
+          src="{{request.user.student.profile_image.url}}"
+          class="w-36 h-36 rounded-full block"
+        />
+      </div>
+      <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+        <div class="sm:col-span-2"></div>
+
+        <div class="w-full">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="file_input"
+            >Upload file</label
+          >
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            id="file_input"
+            type="file"
+          />
+        </div>
+
+        <div class="w-full">
+          <label
+            for="brand"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >First Name</label
+          >
+          <input
+            type="text"
+            name="first_name"
+            id="brand"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            value="{{request.user.first_name}}"
+            placeholder="First Name"
+            required=""
+          />
+        </div>
+
+        <div class="w-full">
+          <label
+            for="middle_name"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Middle Name</label
+          >
+          <input
+            type="text"
+            name="middle_name"
+            id="middle_name"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            value="{{request.user.middle_name}}"
+            placeholder="Middle Name"
+            required=""
+          />
+        </div>
+
+        <div class="w-full">
+          <label
+            for="brand"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Last Name</label
+          >
+          <input
+            type="text"
+            name="last_name"
+            id="brand"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            value="{{request.user.last_name}}"
+            placeholder="Last Name"
+            required=""
+          />
+        </div>
+
+        <div class="w-full">
+          <label
+            for="brand"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Old Password</label
+          >
+          <input
+            type="password"
+            name="old_password"
+            id="brand"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            value=""
+            placeholder="Old Password"
+            required
+          />
+        </div>
+
+        <div class="w-full">
+          <label
+            for="brand"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >New Password</label
+          >
+          <input
+            type="password"
+            name="new_password"
+            id="brand"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            value=""
+            placeholder="New Password"
+          />
+        </div>
+
+        <div class="w-full">
+          <label
+            for="brand"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Confirm New Password</label
+          >
+          <input
+            type="password"
+            name="new_password_confirm"
+            id="brand"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            value=""
+            placeholder="Confirm New password"
+          />
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button
+          type="submit"
+          class="text-white bg-sky-900 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-sky-700 dark:focus:ring-primary-800 w-full"
+        >
+          Update profile
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock content %}

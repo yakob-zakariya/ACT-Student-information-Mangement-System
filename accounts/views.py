@@ -5,7 +5,7 @@ from django.contrib.auth import logout,authenticate
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .models import User 
-from school.models import Department,Batch
+from school.models import Department,Batch,Section_teacher
 
 
 
@@ -35,18 +35,26 @@ def logout_view(request):
 @login_required
 def home_view(request):
     user = request.user 
+    
     if user.role == "REGISTRAR":
         students = User.objects.filter(role="STUDENT")
         return render(request,'registrars/index.html')
+    
     elif user.role == "ADMIN":
         students = User.objects.filter(role="STUDENT").count()
         registrars = User.objects.filter(role="REGISTRAR").count()
         departments = Department.objects.all().count()
         teachers = User.objects.filter(role="TEACHER").count()
         return render(request,'adminApp/index.html',{'students':students,'registrars':registrars,'departments':departments,'teachers':teachers})
+    
     elif user.role == "DEPARTMENT_HEAD":
         batches = Batch.objects.filter(department=request.user.department_head.department)
-    
-        
         return render(request,'departmentHead/index.html',{'batches':batches})
+    
+    elif user.role == "STUDENT":
+        student = request.user
+        return render(request,'student/index.html',{'student':student})
+    elif user.role == "TEACHER":
+        section_teachers = Section_teacher.objects.filter(teacher = request.user)
+        return render(request, 'teacher/index.html', {'section_teachers': section_teachers})
     

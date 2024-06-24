@@ -7,6 +7,10 @@ urlpatterns = [
     path('add-registrar/',views.add_registrar,name='add-registrar'),
     path('delete-registrar/<int:pk>/',views.delete_registrar,name='delete-registrar'),
     
+    path('teachers/',views.teachers,name='teachers'),
+    path('add-teacher/',views.add_teacher,name='add-teacher'),
+    path('delete-teacher/<int:pk>/',views.delete_teacher,name='delete-teacher'),
+    
     # departments 
     path('departments/',views.departments,name='admin_departments'),
     path('add-department/',views.add_department,name='add-department'),
